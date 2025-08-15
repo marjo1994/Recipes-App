@@ -1,12 +1,11 @@
 import { useEffect, useState, type JSX } from "react"
-import { searchRecipes } from "../api/api"
+import { defaultRecipes } from "../api/api"
 import type { Recipe } from "../types";
-import { Filter } from "./Filter";
-import { fakeRecipes } from '../example';
+import { Filters } from "./Filters";
 import { RecipeCard } from "./RecipeCard";
 
 
-export const ListRecipes = (): JSX.Element => {
+export const RecipesList = (): JSX.Element => {
 
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -17,8 +16,8 @@ export const ListRecipes = (): JSX.Element => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                //const result = await searchRecipes();
-                setRecipes(fakeRecipes.results);
+                const result = await defaultRecipes();
+                setRecipes(result.results);
             } catch (error) {
                 if(error instanceof Error) {
                     setError(error.message);
@@ -45,7 +44,7 @@ export const ListRecipes = (): JSX.Element => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
                      <div className="sticky top-4">
-                        <Filter />
+                        <Filters />
                      </div>
                 </div>
                <div className="md:col-span-3">

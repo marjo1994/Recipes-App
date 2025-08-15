@@ -1,16 +1,15 @@
-import { ListRecipes } from './components/ListRecipes'
+import { RecipesList } from './components/RecipesList'
+import { SearchBar } from './components/SearchBar'
 import './App.css'
 
-const App = () => {
+export const App = () => {
   return (
     <div>
-       <h1 className="text-3xl font-bold">
-        Recipes App
+       <h1 className="text-3xl text-center font-bold mb-3">
+        HealthyFood <sup className="text-xl text-emerald-700">everyday</sup>
       </h1>
-      <ListRecipes></ListRecipes>
+      <SearchBar />
+      <RecipesList />
     </div>
   )
 }
-
-export default App;
-
