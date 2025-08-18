@@ -6,7 +6,7 @@ export const fakeRecipes = {
       "readyInMinutes": 20,
       "servings": 4,
       "sourceUrl": "https://example.com/creamy-garlic-pasta",
-      "image": "https://spoonacular.com/recipeImages/12345-312x231.jpg"
+      "image": "https://spoonacular.com/recipeImages/12345-312x231.jpg",
     },
     {
       "id": 23456,

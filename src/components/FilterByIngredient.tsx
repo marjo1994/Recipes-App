@@ -1,6 +1,6 @@
-import { useState } from "react"
+import type { IngredientsFilterProps } from "../types"
 
-export const IngredientsFilter = () => {
+export const IngredientsFilter = ({ selectedIngredients, onIngredientsChange }: IngredientsFilterProps) => {
 
     const commonIngredients = [
     'chicken', 'beef', 'fish', 'pasta', 'rice',
@@ -8,14 +8,11 @@ export const IngredientsFilter = () => {
     'carrot', 'broccoli', 'mushroom', 'spinach', 'egg'
     ]
 
-    const [selectedIngredients, setSelectedIngredients] = useState<string[]>([])
-
     const toggleIngredient = (ingredient: string) => {
-        setSelectedIngredients(prev => 
-            prev.includes(ingredient) 
-            ? prev.filter(item => item != ingredient)
-            : [...prev, ingredient]
-        )
+        const newIngredients = selectedIngredients.includes(ingredient) 
+        ? selectedIngredients.filter(item => item != ingredient)
+        : [...selectedIngredients, ingredient]
+        onIngredientsChange(newIngredients)
     }
 
     return (

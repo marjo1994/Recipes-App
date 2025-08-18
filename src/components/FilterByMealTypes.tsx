@@ -1,19 +1,16 @@
-import { useState } from "react"
+import type { MealTypeFilterProps } from "../types"
 
-export const MealTypeFilter = () => {
+export const MealTypeFilter = ({ selectedMealTypes, onMealTypeChange }: MealTypeFilterProps) => {
 
     const mealTypes = [
     'dessert', 'salad', 'breakfast', 'main course', 'snack',
     'drink']
 
-    const [selectedMealTypes, setSelectedMealTypes] = useState<string[]>([])
-
     const toggleMealTypes = (meal: string) => {
-        setSelectedMealTypes(prev => 
-            prev.includes(meal) 
-            ? prev.filter(item => item != meal)
-            : [...prev, meal]
-        )
+        const newMealTypes = selectedMealTypes.includes(meal) 
+        ? selectedMealTypes.filter(item => item != meal)
+        : [...selectedMealTypes, meal]
+        onMealTypeChange(newMealTypes);
     }
 
     return (

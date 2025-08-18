@@ -1,6 +1,6 @@
-import { useEffect, useState, type JSX } from "react"
-import { defaultRecipes } from "../api/api"
-import type { Recipe } from "../types";
+import { useCallback, useEffect, useState, type JSX } from "react"
+import { fetchRecipes } from "../api/api"
+import type { Recipe, RecipeFilters } from "../types";
 import { Filters } from "./Filters";
 import { RecipeCard } from "./RecipeCard";
 
@@ -8,35 +8,38 @@ import { RecipeCard } from "./RecipeCard";
 export const RecipesList = (): JSX.Element => {
 
     const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    //console.log(searchRecipes());
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const loadInitialRecipes = async () => {
+            setIsLoading(true);
             try {
-                const result = await defaultRecipes();
-                setRecipes(result.results);
+                const data = await fetchRecipes();
+                setRecipes(data.results);
             } catch (error) {
-                if(error instanceof Error) {
-                    setError(error.message);
-                }
+                console.error("Initial load failed:", error);
             } finally {
-                setIsLoading(false);
+                setIsLoading(false)
             }
         };
+        loadInitialRecipes();
+    }, []);
 
-        fetchData();
-    }, [])
+    const handleFilterChange = useCallback(async (filters: RecipeFilters) => {
+        setIsLoading(true);
+        try {
+            const data = await fetchRecipes({
+                includeIngredients: filters.includeIngredients,
+                mealTypes: filters.mealTypes
+            });
+            setRecipes(data.results);
+        } catch (error) {
+            console.error("Filter error:", error);
+        } finally {
+            setIsLoading(false)
+        }
+    }, []);
 
-    if(isLoading) {
-        return <div>Loading data...</div>;
-    }
-
-    if(error) {
-        return <div>Error: {error}</div>;
-    }
 
     return (
         <>
@@ -44,15 +47,19 @@ export const RecipesList = (): JSX.Element => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
                      <div className="sticky top-4">
-                        <Filters />
+                        <Filters onFilterChange={handleFilterChange} />
                      </div>
                 </div>
                <div className="md:col-span-3">
+                {isLoading ? (
+                    <div>Loading recipes...</div>
+                ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {recipes.map((recipe) => (
-                          <RecipeCard recipe={recipe}/>
-                        ))}
+                             <RecipeCard recipe={recipe}/>
+                         ))}
                     </div>
+                )}
                </div>
             </div>
          
