@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { searchRecipes } from "../api/api"
 import type { Recipe } from "../types"
+import { Link } from "react-router-dom";
 
 export const SearchResults = ({search} : {search: string }) => {
     const [results, setResults] = useState<Recipe[]>([]);
@@ -12,7 +13,6 @@ export const SearchResults = ({search} : {search: string }) => {
     const fetchRecipes = async () => {
       setLoading(true);
       setError(null);
-
       try {
           const data = await searchRecipes(search);
           setResults(data.results || []);
@@ -33,10 +33,10 @@ export const SearchResults = ({search} : {search: string }) => {
    
     return results.map((recipe : Recipe) => (
         <li className="mb-2 last:mb-0" key={recipe.title}>
-            <button className="w-full flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <Link to={`/recipe/${recipe.id}`} target="_blank" rel="noopener noreferrer" className="w-full flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <img className="w-12 h-12 object-cover rounded-md" src={recipe.image} alt={recipe.title}/>
                 <span className="text-left truncate">{recipe.title}</span>
-            </button>
+            </Link>
         </li>
     ))
 }

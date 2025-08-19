@@ -2,7 +2,6 @@ import type { RecipeFilters } from '../types';
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
-//const API_KEY = '396599591c3c4d2cb2ed85ffa0abce06';
 const BASE_URL = 'https://api.spoonacular.com/recipes';
 
 export const searchRecipes = async(query: string) => {
@@ -32,7 +31,6 @@ export const fetchRecipes = async(filters: RecipeFilters = {}) => {
         }),
     });
 
-
     const response = await fetch(`${BASE_URL}/complexSearch?${queryParams}`)
 
     if(!response.ok) {
@@ -44,3 +42,8 @@ export const fetchRecipes = async(filters: RecipeFilters = {}) => {
     return data
 }
 
+export const fetchRecipe = async(id: string) => {
+    const response = await fetch(`${BASE_URL}/${id}/information?apiKey=${apiKey}`)
+    const data = await response.json() 
+    return data
+}

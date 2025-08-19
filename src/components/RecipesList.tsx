@@ -5,8 +5,7 @@ import { Filters } from "./Filters";
 import { RecipeCard } from "./RecipeCard";
 
 
-export const RecipesList = (): JSX.Element => {
-
+export const RecipesList = () => {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 

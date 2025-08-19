@@ -1,15 +1,18 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { RecipesList } from './components/RecipesList'
-import { SearchBar } from './components/SearchBar'
+import { Layout } from "./Layout";
 import './App.css'
+import { SingleRecipePage } from "./pages/SingleRecipePage";
 
 export const App = () => {
   return (
-    <div>
-       <h1 className="text-3xl text-center font-bold mb-3">
-        HealthyFood <sup className="text-xl text-emerald-700">everyday</sup>
-      </h1>
-      <SearchBar />
-      <RecipesList />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<RecipesList />}/>
+          <Route path="/recipe/:id" element={<SingleRecipePage />}/>
+        </Route>
+      </Routes>
+    </Router>
   )
 }
