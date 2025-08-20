@@ -44,6 +44,9 @@ export const fetchRecipes = async(filters: RecipeFilters = {}) => {
 
 export const fetchRecipe = async(id: string) => {
     const response = await fetch(`${BASE_URL}/${id}/information?apiKey=${apiKey}`)
+    if(!response.ok) {
+        throw new Error('Failed to get recipe information')
+    }
     const data = await response.json() 
     return data
 }

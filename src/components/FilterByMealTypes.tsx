@@ -15,7 +15,7 @@ export const MealTypeFilter = ({ selectedMealTypes, onMealTypeChange }: MealType
 
     return (
         <div>
-            <span className="text-xl">By Meal Types</span>
+            <span className="text-xl">Meal Types</span>
             <div className="flex flex-wrap gap-2 mt-3">
                {mealTypes.map(meal => (
                 <button

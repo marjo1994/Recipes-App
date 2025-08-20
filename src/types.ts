@@ -23,7 +23,7 @@ interface Measures {
   metric: Measure;
 }
 
-interface ExtendedIngredient {
+export interface ExtendedIngredient {
   id: number;
   aisle: string;
   image: string;
@@ -57,4 +57,10 @@ export interface MealTypeFilterProps {
 export interface IngredientsFilterProps {
   selectedIngredients: string[];
   onIngredientsChange: (ingredients: string[]) => void;
+}
+export interface UseFetchResult<T> {
+  data: T | null;
+  loading: boolean;
+  error: string | null;
+  refetch: () => void;
 }

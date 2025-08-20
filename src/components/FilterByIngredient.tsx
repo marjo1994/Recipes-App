@@ -17,7 +17,7 @@ export const IngredientsFilter = ({ selectedIngredients, onIngredientsChange }: 
 
     return (
         <div>
-            <span className="text-xl">By ingredients</span>
+            <span className="text-xl">Ingredients</span>
             <div className="flex flex-wrap gap-2 mt-3">
                {commonIngredients.map(ingredient => (
                 <button

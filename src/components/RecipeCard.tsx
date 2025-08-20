@@ -5,11 +5,11 @@ import { ArrowRightIcon } from '@heroicons/react/24/solid';
 export const RecipeCard = ({recipe} : {recipe: Recipe}) => {
     return (
         <div key={recipe.id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-            <Link to={`/recipe/${recipe.id}`} target="_blank" rel="noopener noreferrer">
+            <Link to={`/recipe/${recipe.id}`}>
               <img className="rounded-t-lg" src={recipe.image} alt={recipe.title} />
             </Link>
             <div className="p-5">
-                <Link to={`/recipe/${recipe.id}`} target="_blank" rel="noopener noreferrer">
+                <Link to={`/recipe/${recipe.id}`}>
                     <h5 className="mb-2 text-xl font-bold tracking-tight">{recipe.title}</h5>
                 </Link>
                 <p>Ready in {recipe.readyInMinutes} minutes</p>

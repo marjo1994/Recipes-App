@@ -11,23 +11,6 @@
   padding: 2em;
 }
 
-.two-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px; 
-}
-
-/*Fonts */
-
-h1 {
-  font-size: 3rem;
-  line-height: 1.2;
-}
-
-h2 {
-  font-size: 1.5rem;
-  line-height: 1.2;
-}
 
 /*Layout*/
 
@@ -64,58 +47,28 @@ h2 {
   width: 100%;
 }
 
+/* Broccoli Spin */
 
-
-/*Single Recipe Page */
-
-.recipe-header {
-  margin-top: 1.5rem;
-}
-
-.recipe-content {
-  margin-top: 1.5rem;
-}
-.ingredients-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
-}
-
-.ingredient-card {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: white;
-}
-
-.ingredient-img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.ingredient-info {
+.loader-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  text-align: center;
 }
 
-.ingredient-amount {
-  font-weight: bold;
-  color: #2c5530;
+.loader {
+  margin-bottom: 1rem;
 }
 
-.ingredient-name {
-  font-size: 0.9rem;
+.spinning-broccoli {
+  animation: spin 1.5s linear infinite;
+  width: 80px;
+  height: 80px;
 }
 
-.ingredient-meta {
-  font-size: 0.8rem;
-  color: #666;
-  font-style: italic;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

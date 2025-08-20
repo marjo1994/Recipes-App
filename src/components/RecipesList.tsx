@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState, type JSX } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { fetchRecipes } from "../api/api"
 import type { Recipe, RecipeFilters } from "../types";
 import { Filters } from "./Filters";
 import { RecipeCard } from "./RecipeCard";
+import BroccoliImg from '../assets/broccoli-img.png';
 
 
 export const RecipesList = () => {
@@ -39,7 +40,6 @@ export const RecipesList = () => {
         }
     }, []);
 
-
     return (
         <>
           <div className="container py-8">
@@ -51,10 +51,14 @@ export const RecipesList = () => {
                 </div>
                <div className="md:col-span-3">
                 {isLoading ? (
-                    <div>Loading recipes...</div>
+                     <div className="loader-container">
+                        <div className="loader">
+                            <img src={BroccoliImg} className="spinning-broccoli" alt="Loading recipe" />
+                        </div>
+                    </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {recipes.map((recipe) => (
+                        {recipes.map((recipe: Recipe) => (
                              <RecipeCard recipe={recipe}/>
                          ))}
                     </div>
